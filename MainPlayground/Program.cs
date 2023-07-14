@@ -6,7 +6,7 @@ namespace MainPlayground
     {
         static void Main(string[] args)
         {
-           
+           Console.WriteLine("Teste");
         }
     }
 }
