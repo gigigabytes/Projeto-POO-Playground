@@ -1,0 +1,15 @@
+C:\Users\Matheus\Desktop\Projeto POO\Projeto-POO-Playground\MainPlayground\bin\Debug\net7.0\MainPlayground.exe
+C:\Users\Matheus\Desktop\Projeto POO\Projeto-POO-Playground\MainPlayground\bin\Debug\net7.0\MainPlayground.deps.json
+C:\Users\Matheus\Desktop\Projeto POO\Projeto-POO-Playground\MainPlayground\bin\Debug\net7.0\MainPlayground.runtimeconfig.json
+C:\Users\Matheus\Desktop\Projeto POO\Projeto-POO-Playground\MainPlayground\bin\Debug\net7.0\MainPlayground.dll
+C:\Users\Matheus\Desktop\Projeto POO\Projeto-POO-Playground\MainPlayground\bin\Debug\net7.0\MainPlayground.pdb
+C:\Users\Matheus\Desktop\Projeto POO\Projeto-POO-Playground\MainPlayground\obj\Debug\net7.0\MainPlayground.csproj.AssemblyReference.cache
+C:\Users\Matheus\Desktop\Projeto POO\Projeto-POO-Playground\MainPlayground\obj\Debug\net7.0\MainPlayground.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Matheus\Desktop\Projeto POO\Projeto-POO-Playground\MainPlayground\obj\Debug\net7.0\MainPlayground.AssemblyInfoInputs.cache
+C:\Users\Matheus\Desktop\Projeto POO\Projeto-POO-Playground\MainPlayground\obj\Debug\net7.0\MainPlayground.AssemblyInfo.cs
+C:\Users\Matheus\Desktop\Projeto POO\Projeto-POO-Playground\MainPlayground\obj\Debug\net7.0\MainPlayground.csproj.CoreCompileInputs.cache
+C:\Users\Matheus\Desktop\Projeto POO\Projeto-POO-Playground\MainPlayground\obj\Debug\net7.0\MainPlayground.dll
+C:\Users\Matheus\Desktop\Projeto POO\Projeto-POO-Playground\MainPlayground\obj\Debug\net7.0\refint\MainPlayground.dll
+C:\Users\Matheus\Desktop\Projeto POO\Projeto-POO-Playground\MainPlayground\obj\Debug\net7.0\MainPlayground.pdb
+C:\Users\Matheus\Desktop\Projeto POO\Projeto-POO-Playground\MainPlayground\obj\Debug\net7.0\MainPlayground.genruntimeconfig.cache
+C:\Users\Matheus\Desktop\Projeto POO\Projeto-POO-Playground\MainPlayground\obj\Debug\net7.0\ref\MainPlayground.dll
