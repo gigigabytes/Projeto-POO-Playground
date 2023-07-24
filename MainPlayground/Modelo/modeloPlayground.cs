@@ -28,10 +28,14 @@ class Crianca{
 }
 
 class Pacote{
+    public List<Pacote> pacs {get;set;}
     public int id { get; set;}
     public string descricao { get; set;}
     public string horas { get; set;}
     public double valor { get; set;}
+    public Pacote(){
+        pacs = new List<Pacote>();
+    }
     public override string ToString() { 
         return $"{id} - {descricao} - Duração:{horas} - Preço:{valor}";}
 }
