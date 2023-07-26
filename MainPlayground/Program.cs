@@ -1,6 +1,7 @@
 ﻿using System;
 
-
+// O playground funciona como o gamestation
+// A compra é de um passe que dura N período
 
 // NECESSARIO TESTAR LISTAR
 namespace MainPlayground
@@ -30,10 +31,6 @@ namespace MainPlayground
 
 
 
-        //   VERIFICAR LISTAR
-
-
-
 
 
 
@@ -57,9 +54,8 @@ namespace MainPlayground
             foreach (Responsavel responsavel in Nresponsavel.Listar())
             {
                 Console.WriteLine(responsavel);
-                Console.WriteLine("TESTE");
-
             }
+            
         }
         public static void InserirPacote()
         {
