@@ -12,7 +12,16 @@ namespace MainPlayground
            Responsavel responsavel = new Responsavel();
            Crianca crianca = new Crianca();
            Pacote pac = new Pacote();
-            
+           int op = Menu();
+           while(op != 0){
+            switch(op){
+                case 1: InserirResponsavel();break;
+                case 2: ListarResponsavel();break;
+            }
+           }
+        //    SEGUNDA OPÇÃO DO MENU TÁ ESQUISITA.... CHECAR
+           
+           
            responsavel.id = 2;
            crianca.id = 2;
            crianca.nome= "suzy";
@@ -47,12 +56,13 @@ namespace MainPlayground
         string contato = Console.ReadLine();
         Responsavel c = new Responsavel { nome = n, cpf = cpf , idade = idade, contato = contato};
         Nresponsavel.Inserir(c);
+        Menu();
     }
     public static void ListarResponsavel(){
         // Adicionar frase
-        foreach (Responsavel d in Nresponsavel.Listar()){
-            Console.WriteLine(d);
-            Console.WriteLine();
+        foreach (Responsavel responsavel in Nresponsavel.Listar()){
+            Console.WriteLine("nome"+responsavel.nome);
+            
         }
     }
 
@@ -63,6 +73,12 @@ namespace MainPlayground
             Console.WriteLine();
         }
     
+    }
+
+    public static int Menu(){
+        Console.WriteLine("1-Inserir Res\n2-Listar Res\n");
+        return int.Parse(Console.ReadLine());
+
     }
 
 
