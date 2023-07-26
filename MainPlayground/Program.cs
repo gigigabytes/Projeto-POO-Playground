@@ -6,81 +6,92 @@
 namespace MainPlayground
 {
     class Program
-    {   
+    {
         static void Main(string[] args)
         {
-           Responsavel responsavel = new Responsavel();
-           Crianca crianca = new Crianca();
-           Pacote pac = new Pacote();
-           int op = Menu();
-           while(op != 0){
-            switch(op){
-                case 1: InserirResponsavel();break;
-                case 2: ListarResponsavel();break;
+            Responsavel responsavel = new Responsavel();
+            Crianca crianca = new Crianca();
+            Pacote pac = new Pacote();
+
+            int op = Menu();
+            while (op != 0)
+            {
+                switch (op)
+                {
+                    case 1: InserirResponsavel(); break;
+                    case 2: ListarResponsavel(); break;
+                    case 3: InserirPacote(); break;
+                    case 4: ListarPacote(); break;
+                }
+                op = Menu();
             }
-           }
-        //    SEGUNDA OPÇÃO DO MENU TÁ ESQUISITA.... CHECAR
-           
-           
-           responsavel.id = 2;
-           crianca.id = 2;
-           crianca.nome= "suzy";
-           crianca.idade = 12;
-           crianca.genero= "F";
-           crianca.outros= "Ama chocolate";
-           responsavel.Criancas.Add(crianca);
-           Console.WriteLine(responsavel.id);
-           foreach (Crianca criancas in responsavel.Criancas){
-            Console.WriteLine("Id Criança:"+ criancas.id);
-            Console.WriteLine("Nome:"+criancas.nome);
-            Console.WriteLine("idade:"+criancas.idade);
-            Console.WriteLine("genero:"+criancas.genero);
-            Console.WriteLine("outros:"+criancas.outros);
-           }
-           
-           ListarResponsavel();
+        }
 
-            
+
+
+
         //   VERIFICAR LISTAR
-             
-           
 
+
+
+
+
+
+        public static void InserirResponsavel()
+        {
             
+            Console.WriteLine("Nome:");
+            string n = Console.ReadLine();
+            Console.WriteLine("Cpf sem pontos ou barras:");
+            string cpf = Console.ReadLine();
+            Console.WriteLine("Idade:");
+            int idade = int.Parse(Console.ReadLine());
+            Console.WriteLine("N° para contato:");
+            string contato = Console.ReadLine();
+            Responsavel c = new Responsavel { nome = n, cpf = cpf, idade = idade, contato = contato };
+            Nresponsavel.Inserir(c);
         }
-        
-    public static void InserirResponsavel(){
-        // Adicionar perguntas de inserção
-        string n = Console.ReadLine();
-        string cpf = Console.ReadLine();
-        int idade = int.Parse(Console.ReadLine());
-        string contato = Console.ReadLine();
-        Responsavel c = new Responsavel { nome = n, cpf = cpf , idade = idade, contato = contato};
-        Nresponsavel.Inserir(c);
-        Menu();
-    }
-    public static void ListarResponsavel(){
-        // Adicionar frase
-        foreach (Responsavel responsavel in Nresponsavel.Listar()){
-            Console.WriteLine("nome"+responsavel.nome);
-            
+        public static void ListarResponsavel()
+        {
+            // Adicionar frase
+            foreach (Responsavel responsavel in Nresponsavel.Listar())
+            {
+                Console.WriteLine(responsavel);
+                Console.WriteLine("TESTE");
+
+            }
         }
-    }
+        public static void InserirPacote()
+        {
+            Console.WriteLine("Descrição:");
+            string d = Console.ReadLine();
+            Console.WriteLine("Tempo de duração:");
+            string h = Console.ReadLine();
+            Console.WriteLine("Valor:");
+            double v = double.Parse(Console.ReadLine());
+            Pacote p = new Pacote{descricao = d, horas = h ,valor = v  };
+            Npacote.Inserir(p);
 
-    public static void ListarPacote(){
-        // Adicionar frase
-        foreach (Pacote p in Npacote.Listar()){
-            Console.WriteLine(p);
-            Console.WriteLine();
         }
-    
+
+        public static void ListarPacote()
+        {
+            // Adicionar frase
+            foreach (Pacote p in Npacote.Listar())
+            {
+                Console.WriteLine(p);
+                Console.WriteLine();
+            }
+
+        }
+
+        public static int Menu()
+        {
+            Console.WriteLine("1-Inserir Res\n2-Listar Res");
+            return int.Parse(Console.ReadLine());
+
+        }
+
     }
-
-    public static int Menu(){
-        Console.WriteLine("1-Inserir Res\n2-Listar Res\n");
-        return int.Parse(Console.ReadLine());
-
-    }
-
-
 }
-}
+
