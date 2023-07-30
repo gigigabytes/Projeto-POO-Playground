@@ -1,17 +1,23 @@
 ﻿using System;
+using System.Text.Json;
+using System.IO;
+using System.Collections.Generic;
 
 
-
-// NECESSARIO TESTAR LISTAR
 namespace MainPlayground
 {
     class Program
     {
         static void Main(string[] args)
         {
+            // Carrega o arquivo json
+            CarregarResponsavel();
+            
             Responsavel responsavel = new Responsavel();
             Crianca crianca = new Crianca();
             Pacote pac = new Pacote();
+            
+            
 
             int op = Menu();
             while (op != 0)
@@ -27,19 +33,8 @@ namespace MainPlayground
             }
         }
 
-
-
-
-        //   VERIFICAR LISTAR
-
-
-
-
-
-
         public static void InserirResponsavel()
         {
-            
             Console.WriteLine("Nome:");
             string n = Console.ReadLine();
             Console.WriteLine("Cpf sem pontos ou barras:");
@@ -50,6 +45,7 @@ namespace MainPlayground
             string contato = Console.ReadLine();
             Responsavel c = new Responsavel { nome = n, cpf = cpf, idade = idade, contato = contato };
             Nresponsavel.Inserir(c);
+            SalvarResponsalvel();
         }
         public static void ListarResponsavel()
         {
@@ -57,8 +53,6 @@ namespace MainPlayground
             foreach (Responsavel responsavel in Nresponsavel.Listar())
             {
                 Console.WriteLine(responsavel);
-                Console.WriteLine("TESTE");
-
             }
         }
         public static void InserirPacote()
@@ -71,7 +65,8 @@ namespace MainPlayground
             double v = double.Parse(Console.ReadLine());
             Pacote p = new Pacote{descricao = d, horas = h ,valor = v  };
             Npacote.Inserir(p);
-
+            SalvarPacote();
+            // Npacote.Salvar();
         }
 
         public static void ListarPacote()
@@ -84,14 +79,55 @@ namespace MainPlayground
             }
 
         }
-
         public static int Menu()
         {
             Console.WriteLine("1-Inserir Res\n2-Listar Res");
             return int.Parse(Console.ReadLine());
 
         }
+    
+        static void SalvarResponsalvel()
+        {
+            string json = JsonSerializer.Serialize(Nresponsavel.responsavel);
+            File.WriteAllText("resp.json",json);
+        }
 
+        static void CarregarResponsavel()
+        {
+            if(File.Exists("resp.json"))
+            {
+                string json = File.ReadAllText("resp.json");
+                Nresponsavel.responsavel = JsonSerializer.Deserialize<List<Responsavel>>(json);
+            }
+            else
+            {
+                Nresponsavel.responsavel = new List<Responsavel>();
+            }
+        }
+
+        static void SalvarPacote()
+        {
+            string json = JsonSerializer.Serialize(Npacote.pac);
+            File.WriteAllText("pacotes.json",json);
+        }
+        static void CarregarPacote()
+        {
+            if(File.Exists("pacotes.json"))
+            {
+                string json = File.ReadAllText("pacotes.json");
+                Npacote.pac = JsonSerializer.Deserialize<List<Pacote>>(json);
+            }
+            else
+            {
+                Npacote.pac = new List<Pacote>();
+            }
+        }
+
+
+
+
+       
+       
     }
 }
 

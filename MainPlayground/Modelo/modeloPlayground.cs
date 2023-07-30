@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
+using System.IO;
 class Responsavel
 {
     public List<Crianca> Criancas { get; set; }
@@ -66,3 +68,7 @@ class Recreacao
         return $"Entrada:{entrada} - Saída {saida}";
     }
 }
+
+
+
+

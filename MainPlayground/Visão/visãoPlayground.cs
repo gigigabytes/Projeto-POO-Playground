@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
-
+using System.IO;
+using System.Xml.Serialization;
+[XmlRoot("Responsavel")]
 class Nresponsavel
 {
     public static List<Responsavel> responsavel = new List<Responsavel>();
@@ -19,12 +21,42 @@ class Nresponsavel
         int id = 0;
         foreach (Responsavel obj in responsavel)
         {
-            if (obj.id > id) id = obj.id;
-            id++;
-            c.id = id;
-            responsavel.Add(c);
+            if (obj.id > id)
+            {
+                id = obj.id;
+            }
         }
+        id++;
+        c.id = id;
+        responsavel.Add(c);
     }
+
+//     public static void Salvar()
+//     {
+//         XmlSerializer xml = new XmlSerializer(typeof(List<Responsavel>));
+//     }
+
+//     public static void Abrir()
+//     {
+//         XmlSerializer xml = new XmlSerializer(typeof(List<Responsavel>));
+//         StreamReader f = null;
+//         try
+//         {
+//             f = new StreamReader ("resplist.xml");
+//             responsavel = (List<Responsavel>)xml.Deserialize(f);
+//         }
+
+//         catch
+//         {
+//             responsavel = new List<Responsavel>();
+//         }
+
+//         finally
+//         {
+//             if  (f!= null)f.Close();
+//         }
+
+//     }
 }
 
 
@@ -40,11 +72,15 @@ class Ncrianca
         int id = 0;
         foreach (Crianca obj in crianca)
         {
-            if (obj.id > id) id = obj.id;
-            id++;
-            b.id = id;
-            crianca.Add(b);
+            if (obj.id > id) 
+            {
+                id = obj.id;
+            }
+            
         }
+        id++;
+        b.id = id;
+        crianca.Add(b);
     }
 }
 
@@ -61,10 +97,50 @@ class Npacote
         int id = 0;
         foreach (Pacote obj in pac)
         {
-            if (obj.id > id) id = obj.id;
-            id++;
-            p.id = id;
-            pac.Add(p);
+            if (obj.id > id)
+            {
+                id = obj.id;
+            } 
+            
         }
+        id++;
+        p.id = id;
+        pac.Add(p);
+        
     }
+
+    // public static void Salvar()
+    // {
+    //     XmlSerializer xml = new XmlSerializer(typeof(List<Pacote>));
+
+
+    //     using (StreamWriter f = new StreamWriter("pacote.xml"))
+    //     {
+    //         xml.Serialize(f,pac);
+    //     }
+    // }
+
+    // public static void Abrir()
+    // {
+    //     XmlSerializer xml = new XmlSerializer(typeof(List<Pacote>));
+    //     StreamReader f = null;
+
+    //     try 
+    //     {
+    //         f = new StreamReader("pacote.xml");
+    //         pac = (List<Pacote>) xml.Deserialize(f);
+    //     }
+
+    //     catch
+    //     {
+    //         pac = new List<Pacote>();
+    //     }
+
+    //     finally
+    //     {
+    //         if (f != null) f.Close();
+    //     }
+    // }
 }
+
+
