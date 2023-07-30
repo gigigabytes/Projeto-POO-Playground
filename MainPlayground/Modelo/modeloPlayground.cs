@@ -10,11 +10,10 @@ class Responsavel
     public string cpf { get; set; }
     public int idade { get; set; }
     public string contato { get; set; }
-    public int saldo { get; set; }
     public string senha { get; set; }
 
 
-    public override string ToString() { return $"Id:{id} - Nome:{nome} - Contato:{contato} - Saldo de Créditos{saldo}"; }
+    public override string ToString() { return $"Id:{id} - Nome:{nome} - Contato:{contato} "; }
 
 }
 

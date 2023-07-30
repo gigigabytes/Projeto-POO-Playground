@@ -55,6 +55,7 @@ class Nresponsavel
         if (obj != null)
         {
             obj.senha = c.senha;
+            obj.contato = c.contato;
         }
     }
 
@@ -124,6 +125,7 @@ class Npacote
         {
             obj.descricao = pac.descricao;
             obj.valor = pac.valor;
+            obj.horas = pac.horas;
         }
     }
 

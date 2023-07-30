@@ -42,7 +42,13 @@ namespace MainPlayground
                         {
                             case 1: ListarPacote(); break;
                             case 2: InserirPacote();break;
+                            case 3: AtualizarPacote();break;
                             case 4: ExcluirPacote();break;
+                            case 5: ListarResponsavel();break;
+                            case 6: CriarConta();break;
+                            case 7: AtualizarUsuario();break;
+                            case 8: ExcluirUsuario();break;
+                            case 99: SairSistema();break;
                         }
                     }
                 }
@@ -50,8 +56,7 @@ namespace MainPlayground
                 catch (Exception erro){Console.WriteLine(erro.Message);}
             }
             Console.WriteLine("Tchau:)");
-            SalvarResponsalvel();
-            SalvarPacote();
+            
         }
         
 
@@ -71,7 +76,6 @@ namespace MainPlayground
             Nresponsavel.Inserir(c);
             Console.WriteLine("Conta criada com sucesso");
             Console.WriteLine("Id de acesso");
-            
         }
 
         static void Login()
@@ -98,7 +102,13 @@ namespace MainPlayground
             Console.WriteLine("|02 - Inserir  |");
             Console.WriteLine("|03 - Atualizar  |");
             Console.WriteLine("|04 - Excluir  |");
-            Console.WriteLine("|                        |");
+            Console.WriteLine("----Usuários----");
+            Console.WriteLine("|05 - Listar  |");
+            Console.WriteLine("|06 - Inserir  |");
+            Console.WriteLine("|07 - Atualizar |");
+            Console.WriteLine("|08 - Excluir  |");
+            Console.WriteLine("|99 - Sair  |");
+            Console.WriteLine("|                     |");
 
             return int.Parse(Console.ReadLine());
 
@@ -110,6 +120,30 @@ namespace MainPlayground
             {
                 Console.WriteLine(responsavel);
             }
+        }
+
+        public static void AtualizarUsuario()
+        {
+            ListarResponsavel();
+            Console.WriteLine("Informe o id para atualizar\n");
+            int id = int.Parse(Console.ReadLine());
+            Console.WriteLine("Informe nova senha");
+            string s = Console.ReadLine();
+            Console.WriteLine("Informe contato");
+            string c = Console.ReadLine();
+            Responsavel responsavel = new Responsavel {id = id , senha = s, contato = c };
+            Nresponsavel.Atualizar(responsavel);
+        }
+
+        public static void ExcluirUsuario()
+        {
+            ListarResponsavel();
+            Console.WriteLine("Infome o id para excluir:");
+            int id = int.Parse(Console.ReadLine());
+            Responsavel responsavel = new Responsavel {id = id};
+            Nresponsavel.Excluir(responsavel);
+            Console.WriteLine("Responsavel excluido.");
+            
         }
         public static void InserirPacote()
         {
@@ -127,13 +161,17 @@ namespace MainPlayground
         public static void AtualizarPacote()
         {
             ListarPacote();
-            Console.WriteLine("Informe o Id para exclusão");
+            Console.WriteLine("Informe o Id para atualizar");
             int id = int.Parse(Console.ReadLine());
             Console.WriteLine("Informe a descrição");
             string s = Console.ReadLine();
-            Pacote pac = new Pacote {id = id, descricao = s};
+            Console.WriteLine("Informe novo período");
+            string p = Console.ReadLine();
+            Console.WriteLine("Informe novo valor");
+            double v = double.Parse(Console.ReadLine());
+            Pacote pac = new Pacote {id = id, descricao = s, horas = p, valor = v};
             Npacote.Atualizar(pac);
-            Console.WriteLine("Informações atualizadas");
+            Console.WriteLine("Informações atualizadas\n");
         }
 
         public static void ExcluirPacote()
@@ -143,9 +181,7 @@ namespace MainPlayground
             int id = int.Parse(Console.ReadLine());
             Pacote pac = new Pacote {id = id};
             Npacote.Excluir(pac);
-            Console.WriteLine("Pacote excluido.");
-
-
+            Console.WriteLine("Pacote excluido.\n");
         }
 
         public static void ListarPacote()
@@ -165,6 +201,13 @@ namespace MainPlayground
             Console.WriteLine("| 02 - Login     |");
             return int.Parse(Console.ReadLine());
 
+        }
+        static void SairSistema()
+        {
+            SalvarResponsalvel();
+            SalvarPacote();
+            SalvarCrianca();
+            usuarioLogado = null;
         }
 
         static void SalvarResponsalvel()
@@ -201,6 +244,25 @@ namespace MainPlayground
             else
             {
                 Npacote.pac = new List<Pacote>();
+            }
+        }
+
+        static void SalvarCrianca()
+        {
+            string json = JsonSerializer.Serialize(Ncrianca.crianca);
+            File.WriteAllText("criancas.json", json);
+        }
+
+        static void CarregarCriancas()
+        {
+            if (File.Exists("criancas.json"))
+            {
+                string json = File.ReadAllText("criancas.json");
+                Ncrianca.crianca = JsonSerializer.Deserialize<List<Crianca>>(json);
+            }
+            else
+            {
+                Ncrianca.crianca = new List<Crianca>();
             }
         }
 
