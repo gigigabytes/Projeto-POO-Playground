@@ -61,7 +61,6 @@ class Nresponsavel
 
 }
 
-
 class Ncrianca
 {
     public static List<Crianca> crianca = new List<Crianca>();
@@ -134,6 +133,63 @@ class Npacote
         if (obj != null) pac.Remove(obj);
     }
 
+}
+
+class Nadmin
+{
+    public static List<Admin> adm = new List<Admin>();
+    public static Admin Login (int id,string senha)
+    {
+        foreach(Admin  obj in adm)
+        {
+            if (obj.id == id && obj.senha == senha) return obj;
+        }
+        return null;
+    }
+
+    public static List<Admin> Listar()
+    {
+        return adm;
+    }
+
+    public static Admin Listar(int id)
+    {
+        foreach(Admin obj in adm)
+        {
+            if (obj.id == id) return obj;
+        }
+        return null;
+    }
+
+    public static void Inserir(Admin a)
+    {
+        int id = 0;
+        foreach (Admin obj in adm)
+        {
+            if (obj.id > id)
+            {
+                id = obj.id;
+            }
+        }
+        id++;
+        a.id=id;
+        adm.Add(a);
+    }
+
+    public static void Excluir (Admin a)
+    {
+        Admin obj = Listar(a.id);
+        if(obj!= null) adm.Remove(obj);
+    }
+
+    public static void Atualizar(Admin a)
+    {
+        Admin obj = Listar(a.id);
+        if (obj != null)
+        {
+            obj.senha = a.senha;
+        }
+    }
 }
 
 

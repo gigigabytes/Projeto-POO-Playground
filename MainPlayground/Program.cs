@@ -9,11 +9,13 @@ namespace MainPlayground
     class Program
     {
         public static Responsavel usuarioLogado = null;
+        public static Admin adminLogado = null;
         static void Main(string[] args)
         {
             // Carrega o arquivo json
             CarregarResponsavel();
             CarregarPacote();
+            CarregarAdmin();
             Responsavel responsavel = new Responsavel();
             Crianca crianca = new Crianca();
             Pacote pac = new Pacote();
@@ -23,8 +25,7 @@ namespace MainPlayground
             int op = 100;
             while (op != 0) 
             {
-                try
-                {
+                
                     if (usuarioLogado == null)
                     {
                         op = MenuVisitante();
@@ -32,10 +33,11 @@ namespace MainPlayground
                         {
                             case 1: CriarConta();break;
                             case 2: Login();break;
+                            case 3: LoginAdmin();break;
                         }
                     }
 
-                    else
+                    else if (adminLogado != null)
                     {
                         op = MenuAdmin();
                         switch(op)
@@ -51,9 +53,9 @@ namespace MainPlayground
                             case 99: SairSistema();break;
                         }
                     }
-                }
                 
-                catch (Exception erro){Console.WriteLine(erro.Message);}
+                
+                
             }
             Console.WriteLine("Tchau:)");
             
@@ -78,6 +80,30 @@ namespace MainPlayground
             Console.WriteLine("Id de acesso");
         }
 
+        static void InserirAdmin()
+        {
+            Console.WriteLine("Informe Nome");
+            string n = Console.ReadLine();
+            Console.WriteLine("Informe senha:");
+            string s = Console.ReadLine();
+            Admin a = new Admin{ nome = n, senha = s};
+            Nadmin.Inserir(a);
+            Console.WriteLine("Conta Criada");
+        }
+        static void LoginAdmin()
+        {
+            Console.WriteLine("Informe id:");
+            int id = int.Parse(Console.ReadLine());
+            Console.WriteLine("Informe senha:");
+            string senha = Console.ReadLine();
+            adminLogado = Nadmin.Login(id,senha);
+            if (adminLogado == null)
+            {
+                Console.WriteLine("Id ou senha incorreta");
+            }
+            else{Console.WriteLine("Bem vindo");}
+        }
+        
         static void Login()
         {
             Console.WriteLine("Área de login");
@@ -207,6 +233,7 @@ namespace MainPlayground
             SalvarResponsalvel();
             SalvarPacote();
             SalvarCrianca();
+            SalvarAdmin();
             usuarioLogado = null;
         }
 
@@ -263,6 +290,25 @@ namespace MainPlayground
             else
             {
                 Ncrianca.crianca = new List<Crianca>();
+            }
+        }
+
+        static void SalvarAdmin()
+        {
+            string json = JsonSerializer.Serialize(Nadmin.adm);
+            File.WriteAllText("admins.json",json);
+        }
+
+        static void CarregarAdmin()
+        {
+            if (File.Exists("admins.json"))
+            {
+                string json = File.ReadAllText("admins.json");
+                Nadmin.adm = JsonSerializer.Deserialize<List<Admin>>(json);
+            }
+            else
+            {
+                Nadmin.adm = new List<Admin>();
             }
         }
 
