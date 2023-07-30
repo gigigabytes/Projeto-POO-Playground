@@ -12,6 +12,7 @@ namespace MainPlayground
         {
             // Carrega o arquivo json
             CarregarResponsavel();
+            CarregarPacote();
             
             Responsavel responsavel = new Responsavel();
             Crianca crianca = new Crianca();
