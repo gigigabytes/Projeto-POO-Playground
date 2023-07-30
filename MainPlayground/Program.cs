@@ -180,7 +180,7 @@ namespace MainPlayground
             Console.WriteLine("Infome o id para excluir:");
             int id = int.Parse(Console.ReadLine());
             Pacote pac = new Pacote {id = id};
-            Npacote.Excluir(pac);
+            Npacote.ExcluirPacote(pac);
             Console.WriteLine("Pacote excluido.\n");
         }
 

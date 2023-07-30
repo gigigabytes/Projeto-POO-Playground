@@ -77,8 +77,7 @@ class Ncrianca
             if (obj.id > id) 
             {
                 id = obj.id;
-            }
-            
+            } 
         }
         id++;
         b.id = id;
@@ -129,9 +128,9 @@ class Npacote
         }
     }
 
-    public static void Excluir(Pacote pac)
+    public static void ExcluirPacote(Pacote pac)
     {
-        Pacote obj = Listar(pac.id);
+         Pacote obj = Listar(pac.id);
         if (obj != null) pac.Remove(obj);
     }
 
