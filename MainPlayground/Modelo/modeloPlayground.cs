@@ -40,6 +40,11 @@ class Pacote
     {
         return $"{id} - {descricao} - Duração:{horas} - Preço:{valor}";
     }
+
+    internal void Remove(Pacote obj)
+    {
+        throw new NotImplementedException();
+    }
 }
 
 class Admin

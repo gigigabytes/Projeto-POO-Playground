@@ -1,20 +1,32 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Xml.Serialization;
-[XmlRoot("Responsavel")]
+
+
 class Nresponsavel
 {
     public static List<Responsavel> responsavel = new List<Responsavel>();
-    // public static Responsavel Login(int id, string senha){
-    //     foreach (Responsavel obj in responsavel){
-    //         if (obj.id == id && obj.senha == senha) return obj;
-    //     return null;    
-    //     }
-    // }
+    public static Responsavel Login (int id, string senha)
+    {
+        foreach (Responsavel obj in responsavel)
+        {
+            if (obj.id == id && obj.senha == senha) return obj;
+              
+        }
+        return null;
+    }
     public static List<Responsavel> Listar()
     {
         return responsavel;
+    }
+
+    public static Responsavel Listar(int id)
+    {
+        foreach(Responsavel obj in responsavel)
+        {
+            if(obj.id == id) return obj;
+        }
+        return null;
     }
     public static void Inserir(Responsavel c)
     {
@@ -31,32 +43,21 @@ class Nresponsavel
         responsavel.Add(c);
     }
 
-//     public static void Salvar()
-//     {
-//         XmlSerializer xml = new XmlSerializer(typeof(List<Responsavel>));
-//     }
+    public static void Excluir(Responsavel c)
+    {
+        Responsavel obj = Listar(c.id);
+        if (obj != null) responsavel.Remove(obj);
+    }
 
-//     public static void Abrir()
-//     {
-//         XmlSerializer xml = new XmlSerializer(typeof(List<Responsavel>));
-//         StreamReader f = null;
-//         try
-//         {
-//             f = new StreamReader ("resplist.xml");
-//             responsavel = (List<Responsavel>)xml.Deserialize(f);
-//         }
+    public static void Atualizar(Responsavel c)
+    {
+        Responsavel obj = Listar(c.id);
+        if (obj != null)
+        {
+            obj.senha = c.senha;
+        }
+    }
 
-//         catch
-//         {
-//             responsavel = new List<Responsavel>();
-//         }
-
-//         finally
-//         {
-//             if  (f!= null)f.Close();
-//         }
-
-//     }
 }
 
 
@@ -101,46 +102,37 @@ class Npacote
             {
                 id = obj.id;
             } 
-            
         }
         id++;
         p.id = id;
         pac.Add(p);
-        
     }
 
-    // public static void Salvar()
-    // {
-    //     XmlSerializer xml = new XmlSerializer(typeof(List<Pacote>));
+    public static Pacote Listar (int id)
+    {
+        foreach(Pacote obj in pac)
+        {
+            if (obj.id == id) return obj;
+        }
+        return null;
+    }
 
+    public static void Atualizar(Pacote pac)
+    {
+        Pacote obj = Listar(pac.id);
+        if (obj != null)
+        {
+            obj.descricao = pac.descricao;
+            obj.valor = pac.valor;
+        }
+    }
 
-    //     using (StreamWriter f = new StreamWriter("pacote.xml"))
-    //     {
-    //         xml.Serialize(f,pac);
-    //     }
-    // }
+    public static void Excluir(Pacote pac)
+    {
+        Pacote obj = Listar(pac.id);
+        if (obj != null) pac.Remove(obj);
+    }
 
-    // public static void Abrir()
-    // {
-    //     XmlSerializer xml = new XmlSerializer(typeof(List<Pacote>));
-    //     StreamReader f = null;
-
-    //     try 
-    //     {
-    //         f = new StreamReader("pacote.xml");
-    //         pac = (List<Pacote>) xml.Deserialize(f);
-    //     }
-
-    //     catch
-    //     {
-    //         pac = new List<Pacote>();
-    //     }
-
-    //     finally
-    //     {
-    //         if (f != null) f.Close();
-    //     }
-    // }
 }
 
 
