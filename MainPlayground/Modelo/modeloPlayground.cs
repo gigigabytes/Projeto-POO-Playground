@@ -34,7 +34,7 @@ class Pacote
     public List<Pacote> pacs { get; set; }
     public int id { get; set; }
     public string descricao { get; set; }
-    public string horas { get; set; }
+    public string horas { get; set; } // Ajustar para período
     public double valor { get; set; }
     public override string ToString()
     {

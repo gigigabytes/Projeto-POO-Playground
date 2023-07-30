@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Text.Json;
-using System.IO;
-using System.Collections.Generic;
 
+// O playground funciona como o gamestation
+// A compra é de um passe que dura N período
 
 namespace MainPlayground
 {
@@ -34,6 +33,12 @@ namespace MainPlayground
             }
         }
 
+
+
+
+
+
+
         public static void InserirResponsavel()
         {
             Console.WriteLine("Nome:");
@@ -55,6 +60,7 @@ namespace MainPlayground
             {
                 Console.WriteLine(responsavel);
             }
+            
         }
         public static void InserirPacote()
         {
