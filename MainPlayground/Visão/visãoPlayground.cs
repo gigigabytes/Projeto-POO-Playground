@@ -68,6 +68,14 @@ class Ncrianca
     {
         return crianca;
     }
+    public static Crianca Listar(int id)
+    {
+        foreach( Crianca obj in crianca)
+        {
+            if(obj.id == id) return obj;
+        }
+        return null;
+    }
     public static void Inserir(Crianca b)
     {
         int id = 0;
@@ -81,6 +89,21 @@ class Ncrianca
         id++;
         b.id = id;
         crianca.Add(b);
+    }
+
+     public static void Excluir(Crianca b)
+    {
+        Crianca obj = Listar(b.id);
+        if (obj != null) crianca.Remove(obj);
+    }
+
+     public static void Atualizar(Crianca b)
+    {
+        Crianca obj = Listar(b.id);
+        if (obj != null)
+        {
+            obj.outros = b.outros;
+        }
     }
 }
 

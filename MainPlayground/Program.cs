@@ -10,12 +10,14 @@ namespace MainPlayground
     {
         public static Responsavel usuarioLogado = null;
         public static Admin adminLogado = null;
+
         static void Main(string[] args)
         {
             // Carrega o arquivo json
             CarregarResponsavel();
             CarregarPacote();
             CarregarAdmin();
+            CarregarCriancas();
             Responsavel responsavel = new Responsavel();
             Crianca crianca = new Crianca();
             Pacote pac = new Pacote();
@@ -23,44 +25,58 @@ namespace MainPlayground
 
             Console.WriteLine("Bem vindo ao playground!\n");
             int op = 100;
-            while (op != 0) 
+
+
+            op = Menu();
+                switch (op)
+                {
+                    case 1: CriarConta(); break;
+                    case 2: Login(); break;
+                    case 3: LoginAdmin(); break;
+                }
+            while (op != 0)
             {
+
                 
-                    if (usuarioLogado == null)
+                if (usuarioLogado != null)
+                {
+
+                    op = MenuUsuario();
+                    switch (op)
                     {
-                        op = MenuVisitante();
-                        switch(op)
-                        {
-                            case 1: CriarConta();break;
-                            case 2: Login();break;
-                            case 3: LoginAdmin();break;
-                        }
+                        case 1: InserirCrianca(); break;
+                        case 2: ListarCrianca(); break;
+                        case 4: ExcluirCriança(); break;
+                        case 5: AtualizarCrianca(); break;
+                        case 6: SairSistema();break;
                     }
 
-                    else if (adminLogado != null)
+                }
+
+                else if (adminLogado != null)
+                {
+                    op = MenuAdmin();
+                    switch (op)
                     {
-                        op = MenuAdmin();
-                        switch(op)
-                        {
-                            case 1: ListarPacote(); break;
-                            case 2: InserirPacote();break;
-                            case 3: AtualizarPacote();break;
-                            case 4: ExcluirPacote();break;
-                            case 5: ListarResponsavel();break;
-                            case 6: CriarConta();break;
-                            case 7: AtualizarUsuario();break;
-                            case 8: ExcluirUsuario();break;
-                            case 99: SairSistema();break;
-                        }
+                        case 1: ListarPacote(); break;
+                        case 2: InserirPacote(); break;
+                        case 3: AtualizarPacote(); break;
+                        case 4: ExcluirPacote(); break;
+                        case 5: ListarResponsavel(); break;
+                        case 6: CriarConta(); break;
+                        case 7: AtualizarUsuario(); break;
+                        case 8: ExcluirUsuario(); break;
+                        case 99: SairSistema(); break;
                     }
-                
-                
-                
+                }
+
+
+
             }
             Console.WriteLine("Tchau:)");
-            
+
         }
-        
+
 
         public static void CriarConta()
         {
@@ -86,7 +102,7 @@ namespace MainPlayground
             string n = Console.ReadLine();
             Console.WriteLine("Informe senha:");
             string s = Console.ReadLine();
-            Admin a = new Admin{ nome = n, senha = s};
+            Admin a = new Admin { nome = n, senha = s };
             Nadmin.Inserir(a);
             Console.WriteLine("Conta Criada");
         }
@@ -96,14 +112,14 @@ namespace MainPlayground
             int id = int.Parse(Console.ReadLine());
             Console.WriteLine("Informe senha:");
             string senha = Console.ReadLine();
-            adminLogado = Nadmin.Login(id,senha);
+            adminLogado = Nadmin.Login(id, senha);
             if (adminLogado == null)
             {
                 Console.WriteLine("Id ou senha incorreta");
             }
-            else{Console.WriteLine("Bem vindo");}
+            else { Console.WriteLine("Bem vindo " + adminLogado.nome); }
         }
-        
+
         static void Login()
         {
             Console.WriteLine("Área de login");
@@ -111,13 +127,13 @@ namespace MainPlayground
             int id = int.Parse(Console.ReadLine());
             Console.WriteLine("Informe a senha");
             string senha = Console.ReadLine();
-            usuarioLogado = Nresponsavel.Login(id,senha);
+            usuarioLogado = Nresponsavel.Login(id, senha);
             // usuarioLogado = Nresponsavel.Login(id, senha);
             if (usuarioLogado == null)
             {
                 Console.WriteLine("Usuário ou senha incorretos");
             }
-            else{ Console.WriteLine("Bem vindo(a)");}
+            else { Console.WriteLine("Bem vindo(a) " + usuarioLogado.nome); }
 
         }
 
@@ -139,6 +155,20 @@ namespace MainPlayground
             return int.Parse(Console.ReadLine());
 
         }
+
+        static int MenuUsuario()
+        {
+            Console.WriteLine("Bem vindo(a) " + usuarioLogado.nome);
+            Console.WriteLine("O que deseja fazer?");
+            Console.WriteLine("01 - Cadastrar criança |");
+            Console.WriteLine("02 - Ver crianças cadastradas |");
+            Console.WriteLine("03 - Ver historico de compras |");
+            Console.WriteLine("04 - Excluir criança |");
+            Console.WriteLine("05 -Atualizar informações da criança |");
+            Console.WriteLine("06 - Sair |");
+
+            return int.Parse(Console.ReadLine());
+        }
         public static void ListarResponsavel()
         {
             // Adicionar frase
@@ -157,7 +187,7 @@ namespace MainPlayground
             string s = Console.ReadLine();
             Console.WriteLine("Informe contato");
             string c = Console.ReadLine();
-            Responsavel responsavel = new Responsavel {id = id , senha = s, contato = c };
+            Responsavel responsavel = new Responsavel { id = id, senha = s, contato = c };
             Nresponsavel.Atualizar(responsavel);
         }
 
@@ -166,10 +196,10 @@ namespace MainPlayground
             ListarResponsavel();
             Console.WriteLine("Infome o id para excluir:");
             int id = int.Parse(Console.ReadLine());
-            Responsavel responsavel = new Responsavel {id = id};
+            Responsavel responsavel = new Responsavel { id = id };
             Nresponsavel.Excluir(responsavel);
             Console.WriteLine("Responsavel excluido.");
-            
+
         }
         public static void InserirPacote()
         {
@@ -181,7 +211,7 @@ namespace MainPlayground
             double v = double.Parse(Console.ReadLine());
             Pacote p = new Pacote { descricao = d, horas = h, valor = v };
             Npacote.Inserir(p);
-            
+
             // Npacote.Salvar();
         }
         public static void AtualizarPacote()
@@ -195,7 +225,7 @@ namespace MainPlayground
             string p = Console.ReadLine();
             Console.WriteLine("Informe novo valor");
             double v = double.Parse(Console.ReadLine());
-            Pacote pac = new Pacote {id = id, descricao = s, horas = p, valor = v};
+            Pacote pac = new Pacote { id = id, descricao = s, horas = p, valor = v };
             Npacote.Atualizar(pac);
             Console.WriteLine("Informações atualizadas\n");
         }
@@ -205,7 +235,7 @@ namespace MainPlayground
             ListarPacote();
             Console.WriteLine("Infome o id para excluir:");
             int id = int.Parse(Console.ReadLine());
-            Pacote pac = new Pacote {id = id};
+            Pacote pac = new Pacote { id = id };
             Npacote.ExcluirPacote(pac);
             Console.WriteLine("Pacote excluido.\n");
         }
@@ -220,11 +250,51 @@ namespace MainPlayground
             }
 
         }
-        public static int MenuVisitante()
+
+        public static void InserirCrianca()
+        {
+            Console.WriteLine("Nome:");
+            string n = Console.ReadLine();
+            Console.WriteLine("Idade (somente numeros)");
+            int idade = int.Parse(Console.ReadLine());
+            Console.WriteLine("Genero F ou M");
+            string g = Console.ReadLine();
+            Console.WriteLine("Alguma informação que você ache essencial sabermos:\n");
+            string o = Console.ReadLine();
+            Crianca crianca = new Crianca { nome = n, idade = idade, genero = g, outros = o };
+            Ncrianca.Inserir(crianca);
+            Console.WriteLine("Criança cadastrada com sucesso.");
+        }
+
+        static void ListarCrianca()
+        {
+            foreach (Crianca crianca in Ncrianca.Listar())
+            {
+                Console.WriteLine(crianca);
+            }
+        }
+
+        public static void AtualizarCrianca()
+        {
+            ListarCrianca();
+
+        }
+
+        public static void ExcluirCriança()
+        {
+            ListarCrianca();
+            Console.WriteLine("Informe o id para excluir");
+            int id = int.Parse(Console.ReadLine());
+            Crianca crianca = new Crianca { id = id };
+            Ncrianca.Excluir(crianca);
+            Console.WriteLine("Criança removida");
+        }
+        public static int Menu()
         {
             Console.WriteLine("-----------Opções--------");
             Console.WriteLine("| 01 - Cadastrar      |");
             Console.WriteLine("| 02 - Login     |");
+            Console.WriteLine("| 03 - Login Admin     |");
             return int.Parse(Console.ReadLine());
 
         }
@@ -235,6 +305,8 @@ namespace MainPlayground
             SalvarCrianca();
             SalvarAdmin();
             usuarioLogado = null;
+            adminLogado = null;
+            Menu();
         }
 
         static void SalvarResponsalvel()
@@ -296,7 +368,7 @@ namespace MainPlayground
         static void SalvarAdmin()
         {
             string json = JsonSerializer.Serialize(Nadmin.adm);
-            File.WriteAllText("admins.json",json);
+            File.WriteAllText("admins.json", json);
         }
 
         static void CarregarAdmin()
