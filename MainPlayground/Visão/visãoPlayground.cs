@@ -68,13 +68,12 @@ class Ncrianca
     {
         return crianca;
     }
-    public static Crianca Listar(int idcheck)
+    public static Crianca Listar(int id)
     {   
         
-        var resp = from Crianca crianca in crianca  where crianca.idresponsavel == idcheck select crianca;
-        foreach( Crianca c in resp)
+       foreach(Crianca obj in crianca)
         {
-            return c;
+            if (obj.id == id) return obj;
         }
         return null;
     }

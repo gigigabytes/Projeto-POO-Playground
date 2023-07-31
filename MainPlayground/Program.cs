@@ -167,7 +167,7 @@ namespace MainPlayground
 
         static int MenuUsuario()
         {
-            Console.WriteLine("Bem vindo(a) " + usuarioLogado.nome);
+            // Console.WriteLine("Bem vindo(a) " + usuarioLogado.nome);
             Console.WriteLine("O que deseja fazer?");
             Console.WriteLine("01 - Cadastrar criança |");
             Console.WriteLine("02 - Ver crianças cadastradas |");
@@ -291,10 +291,24 @@ namespace MainPlayground
 
         static void ListarCrianca()
         {
-            Crianca crianca = new Crianca{id = usuarioLogado.id};
-            foreach ( Crianca c in Ncrianca.Listar())
+            Ncrianca.Listar();
+
+            List<Crianca> respon;
+
+            respon = Ncrianca.Listar().Where(c => c.idresponsavel == usuarioLogado.id).ToList();
+
+            if(respon.Count ==0)
             {
-                Console.WriteLine(c);
+                Console.WriteLine("Nenhuma crianca cadastrada");
+            }
+
+            else
+            {
+                Console.WriteLine("Crianças cadastradas:");
+                foreach(Crianca c in respon)
+                {
+                    Console.WriteLine($"{c.nome}");
+                }
             }
         }
 
@@ -357,7 +371,7 @@ namespace MainPlayground
             usuarioLogado = null;
             adminLogado = null;
 
-            Menu();
+            // Menu();
         }
         //
 
