@@ -279,7 +279,7 @@ namespace MainPlayground
             string g = Console.ReadLine();
             Console.WriteLine("Alguma informação que você ache essencial sabermos:\n");
             string o = Console.ReadLine();
-            Crianca crianca = new Crianca { nome = n, idade = idade, genero = g, outros = o };
+            Crianca crianca = new Crianca { nome = n, idade = idade, genero = g, outros = o, idresponsavel = usuarioLogado.id };
             Ncrianca.Inserir(crianca);
             Console.WriteLine("Criança cadastrada com sucesso.");
         }
@@ -295,6 +295,13 @@ namespace MainPlayground
         public static void AtualizarCrianca()
         {
             ListarCrianca();
+            Console.WriteLine("Informe o Id para atualizar");
+            int id = int.Parse(Console.ReadLine());
+            Console.WriteLine("Nova informação necessaria");
+            string s = Console.ReadLine();
+            Crianca crianca = new Crianca {id = id, outros = s};
+            Ncrianca.Atualizar(crianca);
+            Console.WriteLine("Informações atualizadas\n");
 
         }
 

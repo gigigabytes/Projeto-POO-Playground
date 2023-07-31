@@ -70,6 +70,7 @@ class Ncrianca
     }
     public static Crianca Listar(int id)
     {
+
         foreach( Crianca obj in crianca)
         {
             if(obj.id == id) return obj;

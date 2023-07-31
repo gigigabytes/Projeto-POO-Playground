@@ -19,13 +19,14 @@ class Responsavel
 
 class Crianca
 {
+    public int idresponsavel {get;set;}
     public int id { get; set; }
     public string nome { get; set; }
     public int idade { get; set; }
     public string genero { get; set; }
     public string outros { get; set; }
 
-    public override string ToString() { return $"Id:{id}Nome: {nome}, Idade: {idade}"; }
+    public override string ToString() { return $"Id:{id}Nome: {nome}, Idade: {idade}, Id responsavel: {idresponsavel}"; }
 }
 
 class Pacote
