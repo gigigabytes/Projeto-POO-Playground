@@ -300,7 +300,7 @@ namespace MainPlayground
         }
         static void SairSistema()
         {
-            SalvarResponsalvel();
+            SalvarResponsavel();
             SalvarPacote();
             SalvarCrianca();
             SalvarAdmin();
@@ -309,7 +309,7 @@ namespace MainPlayground
             Menu();
         }
 
-        static void SalvarResponsalvel()
+        static void SalvarResponsavel()
         {
             string json = JsonSerializer.Serialize(Nresponsavel.responsavel);
             File.WriteAllText("resp.json", json);
