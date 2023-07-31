@@ -62,8 +62,8 @@ class Compra
 
     public List<Compra> compras { get; set; }
 
-    public int IdResponsavel { get; set; }
-    public int IdPacote { get; set; }
+    public int idresponsavel { get; set; }
+    public int idpacote { get; set; }
     public DateTime data { get; set; }
     //
 }
