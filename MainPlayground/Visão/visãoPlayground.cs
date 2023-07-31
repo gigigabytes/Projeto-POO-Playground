@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-
+using System.Linq;
 
 class Nresponsavel
 {
@@ -68,12 +68,13 @@ class Ncrianca
     {
         return crianca;
     }
-    public static Crianca Listar(int id)
-    {
-
-        foreach( Crianca obj in crianca)
+    public static Crianca Listar(int idcheck)
+    {   
+        
+        var resp = from Crianca crianca in crianca  where crianca.idresponsavel == idcheck select crianca;
+        foreach( Crianca c in resp)
         {
-            if(obj.id == id) return obj;
+            return c;
         }
         return null;
     }
@@ -153,9 +154,9 @@ class Npacote
         }
     }
 
-    public static void ExcluirPacote(Pacote pac)
+    public static void ExcluirPacote(Pacote p)
     {
-         Pacote obj = Listar(pac.id);
+        Pacote obj = Listar(p.id);
         if (obj != null) pac.Remove(obj);
     }
 
@@ -168,42 +169,42 @@ class Ncompra
     {
         return compras;
     }
-    public static void Inserir(Compra compras)
+    public static void Inserir(Compra c)
     {
         int id = 0;
         foreach (Compra obj in compras)
         {
-            if (obj.id > id)
+            if (obj.idcompra > id)
             {
-                id = obj.id;
+                id = obj.idcompra;
             } 
         }
         id++;
-        compras.id = id;
-        compras.Add(compras);
+        c.idcompra = id;
+        compras.Add(c);
     }
 
     public static Compra Listar (int id)
     {
         foreach(Compra obj in compras)
         {
-            if (obj.id == id) return obj;
+            if (obj.idcompra == id) return obj;
         }
         return null;
     }
 
     public static void Atualizar(Compra compras)
     {
-        Compra obj = Listar(compras.id);
+        Compra obj = Listar(compras.idcompra);
         if (obj != null)
         {
             obj.idresponsavel = compras.idresponsavel;
         }
     }
 
-    public static void ExcluirPacote(Pacote pac)
+    public static void ExcluirCompra(Compra c)
     {
-         Compra obj = Listar(compras.id);
+        Compra obj = Listar(c.idcompra);
         if (obj != null) compras.Remove(obj);
     }
 

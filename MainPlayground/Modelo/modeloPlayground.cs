@@ -19,6 +19,7 @@ class Responsavel
 
 class Crianca
 {
+    public List<Crianca> Criancas { get; set; }
     public int idresponsavel {get;set;}
     public int id { get; set; }
     public string nome { get; set; }
@@ -41,10 +42,7 @@ class Pacote
         return $"{id} - {descricao} - Duração:{horas} - Preço:{valor}";
     }
 
-    internal void Remove(Pacote obj)
-    {
-        throw new NotImplementedException();
-    }
+   
 }
 
 class Admin
@@ -58,18 +56,13 @@ class Admin
 
 class Compra
 {
-    //
-{
-
-    public List<Compra> compras { get; set; }
-
+    public int idcompra {get;set;}
     public int idresponsavel { get; set; }
     public int idpacote { get; set; }
+    
     public DateTime data { get; set; }
-    //
-}
-
-    public override string ToString() { return $"Dia da compra {data};"; }
+    
+    public override string ToString() { return $"Dia da compra {data}, Id compra: {idcompra}, Comprado por: {idresponsavel}, Pacote comprado: {idpacote};"; }
 }
 
 class Recreacao

@@ -2,6 +2,7 @@
 using System.Text.Json;
 using System.IO;
 using System.Collections.Generic;
+using System.Linq;
 
 
 namespace MainPlayground
@@ -11,7 +12,7 @@ namespace MainPlayground
         public static Responsavel usuarioLogado = null;
         public static Admin adminLogado = null;
 
-        
+
 
         static void Main(string[] args)
         {
@@ -20,27 +21,28 @@ namespace MainPlayground
             CarregarPacote();
             CarregarAdmin();
             CarregarCriancas();
-            Responsavel responsavel = new Responsavel();
-            Crianca crianca = new Crianca();
-            Pacote pac = new Pacote();
+            CarregarCompras();
+            // Responsavel responsavel = new Responsavel();
+            // Crianca crianca = new Crianca();
+            // Pacote pac = new Pacote();
 
             Console.WriteLine("Bem vindo ao playground!\n");
             int op = 100;
-            
+
             op = Menu();
-                switch (op)
+            switch (op)
+            {
+                case 1: CriarConta(); break;
+                case 2: Login(); break;
+                case 3: LoginAdmin(); break;
+            }
+
+
+
+            if (usuarioLogado != null)
+            {
+                while (op != 0)
                 {
-                    case 1: CriarConta(); break;
-                    case 2: Login(); break;
-                    case 3: LoginAdmin(); break;
-                }
-               
-                
-                
-                if (usuarioLogado != null )
-                {
-                    while (op != 0)
-                    {
                     op = MenuUsuario();
                     switch (op)
                     {
@@ -48,18 +50,18 @@ namespace MainPlayground
                         case 2: ListarCrianca(); break;
                         case 4: ExcluirCriança(); break;
                         case 5: AtualizarCrianca(); break;
-                        case 6: SairSistema();break;
+                        case 6: SairSistema(); break;
                         case 7: ComprarPacote(); break;
 
                     }
-                    }
-
                 }
 
-                else if (adminLogado != null)
+            }
+
+            else if (adminLogado != null)
+            {
+                while (op != 0)
                 {
-                    while (op!=0)
-                    {
                     op = MenuAdmin();
                     switch (op)
                     {
@@ -73,12 +75,12 @@ namespace MainPlayground
                         case 8: ExcluirUsuario(); break;
                         case 99: SairSistema(); break;
                     }
-                    }
                 }
+            }
 
 
 
-            
+
             Console.WriteLine("Tchau:)");
 
         }
@@ -187,16 +189,16 @@ namespace MainPlayground
             }
         }
 
-//       static void InserirUsuario()
-//        {
-//           Console.WriteLine("Informe Nome");
-//           string n = Console.ReadLine();
-//           Console.WriteLine("Informe senha:");
-//            string s = Console.ReadLine();
-//            Admin a = new Admin { nome = n, senha = s };
-//            Nadmin.Inserir(a);
-//            Console.WriteLine("Conta Criada");
-//        }
+        //       static void InserirUsuario()
+        //        {
+        //           Console.WriteLine("Informe Nome");
+        //           string n = Console.ReadLine();
+        //           Console.WriteLine("Informe senha:");
+        //            string s = Console.ReadLine();
+        //            Admin a = new Admin { nome = n, senha = s };
+        //            Nadmin.Inserir(a);
+        //            Console.WriteLine("Conta Criada");
+        //        }
 
 
         public static void AtualizarUsuario()
@@ -289,9 +291,10 @@ namespace MainPlayground
 
         static void ListarCrianca()
         {
-            foreach (Crianca crianca in Ncrianca.Listar())
+            Crianca crianca = new Crianca{id = usuarioLogado.id};
+            foreach ( Crianca c in Ncrianca.Listar())
             {
-                Console.WriteLine(crianca);
+                Console.WriteLine(c);
             }
         }
 
@@ -302,7 +305,7 @@ namespace MainPlayground
             int id = int.Parse(Console.ReadLine());
             Console.WriteLine("Nova informação necessaria");
             string s = Console.ReadLine();
-            Crianca crianca = new Crianca {id = id, outros = s};
+            Crianca crianca = new Crianca { id = id, outros = s };
             Ncrianca.Atualizar(crianca);
             Console.WriteLine("Informações atualizadas\n");
 
@@ -316,6 +319,24 @@ namespace MainPlayground
             Crianca crianca = new Crianca { id = id };
             Ncrianca.Excluir(crianca);
             Console.WriteLine("Criança removida");
+        }
+
+        static void ComprarPacote()
+        {
+            ListarPacote();
+            Console.WriteLine("Informe o Id  tipo de pacote que deseja comprar:");
+            int idPacote = int.Parse(Console.ReadLine());
+
+            if (Npacote.pac.Any(p => p.id == idPacote))
+            {
+                Compra compras = new Compra { idresponsavel = usuarioLogado.id, idpacote = idPacote, data = DateTime.Now };
+                Ncompra.Inserir(compras);
+                Console.WriteLine("Compra realizada com sucesso!");
+            }
+            else
+            {
+                Console.WriteLine("Pacote não encontrado. Compra não realizada.");
+            }
         }
         public static int Menu()
         {
@@ -332,36 +353,15 @@ namespace MainPlayground
             SalvarPacote();
             SalvarCrianca();
             SalvarAdmin();
+            SalvarCompras();
             usuarioLogado = null;
             adminLogado = null;
-            
+
             Menu();
         }
-//
-     static void ComprarPacote()
-{
-    ListarPacote();
-    Console.WriteLine("Informe o Id  tipo de pacote que deseja comprar:");
-    int idPacote = int.Parse(Console.ReadLine());
+        //
 
-    if (Npacote.pac.Any(p => p.Id == idPacote))
-    {
-        Compra compra = new Compra
-        {
-            IdResponsavel = usuarioLogado.Id,
-            IdPacote = idPacote,
-            DataCompra = DateTime.Now
-        };
-        compras.Add(compra);
-        Console.WriteLine("Compra realizada com sucesso!");
-    }
-    else
-    {
-        Console.WriteLine("Pacote não encontrado. Compra não realizada.");
-    }
-}
-
-//
+        //
         static void SalvarResponsavel()
         {
             string json = JsonSerializer.Serialize(Nresponsavel.responsavel);
@@ -434,6 +434,25 @@ namespace MainPlayground
             else
             {
                 Nadmin.adm = new List<Admin>();
+            }
+        }
+
+        static void SalvarCompras()
+        {
+            string json = JsonSerializer.Serialize(Ncompra.compras);
+            File.WriteAllText("compras.json", json);
+        }
+        
+        static void CarregarCompras()
+        {
+            if (File.Exists("compras.json"))
+            {
+                string json = File.ReadAllText("compras.json");
+                Ncompra.compras = JsonSerializer.Deserialize<List<Compra>>(json);
+            }
+            else
+            {
+                Ncompra.compras = new List<Compra>();
             }
         }
 
