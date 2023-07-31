@@ -82,7 +82,33 @@ class Ncrianca
         b.id = id;
         crianca.Add(b);
     }
-}
+//Parte criança adicionada
+            public static Crianca Listar (int id)
+            {
+                foreach(Crianca obj in crianca)
+                {
+                    if (obj.id == id) return obj;
+                }
+                return null;
+            }
+
+            public static void Atualizar(Crianca crianca)
+            {
+                Pacote obj = Listar(crianca.id);
+                if (obj != null)
+                {
+                    obj.outros = crianca.outros;
+                }
+            }
+
+            public static void ExcluirCrianca(Crianca crianca)
+            {
+                Crianca obj = Listar(crianca.id);
+                if (obj != null) crianca.Remove(obj);
+            }
+//
+ }
+
 
 class Npacote
 {

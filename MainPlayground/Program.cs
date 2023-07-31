@@ -237,7 +237,7 @@ namespace MainPlayground
             usuarioLogado = null;
         }
 
-        static void SalvarResponsalvel()
+        static void SalvarResponsavel()
         {
             string json = JsonSerializer.Serialize(Nresponsavel.responsavel);
             File.WriteAllText("resp.json", json);
