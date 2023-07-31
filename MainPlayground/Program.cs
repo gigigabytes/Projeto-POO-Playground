@@ -11,6 +11,8 @@ namespace MainPlayground
         public static Responsavel usuarioLogado = null;
         public static Admin adminLogado = null;
 
+        
+
         static void Main(string[] args)
         {
             // Carrega o arquivo json
@@ -25,8 +27,7 @@ namespace MainPlayground
 
             Console.WriteLine("Bem vindo ao playground!\n");
             int op = 100;
-
-
+            
             op = Menu();
                 switch (op)
                 {
@@ -34,13 +35,13 @@ namespace MainPlayground
                     case 2: Login(); break;
                     case 3: LoginAdmin(); break;
                 }
-            while (op != 0)
-            {
-
+               
                 
-                if (usuarioLogado != null)
+                
+                if (usuarioLogado != null )
                 {
-
+                    while (op != 0)
+                    {
                     op = MenuUsuario();
                     switch (op)
                     {
@@ -50,11 +51,14 @@ namespace MainPlayground
                         case 5: AtualizarCrianca(); break;
                         case 6: SairSistema();break;
                     }
+                    }
 
                 }
 
                 else if (adminLogado != null)
                 {
+                    while (op!=0)
+                    {
                     op = MenuAdmin();
                     switch (op)
                     {
@@ -68,11 +72,12 @@ namespace MainPlayground
                         case 8: ExcluirUsuario(); break;
                         case 99: SairSistema(); break;
                     }
+                    }
                 }
 
 
 
-            }
+            
             Console.WriteLine("Tchau:)");
 
         }
@@ -93,7 +98,8 @@ namespace MainPlayground
             Responsavel c = new Responsavel { nome = n, cpf = cpf, idade = idade, contato = contato, senha = senha };
             Nresponsavel.Inserir(c);
             Console.WriteLine("Conta criada com sucesso");
-            Console.WriteLine("Id de acesso");
+            Console.WriteLine("Id de acesso" + c.id);
+
         }
 
         static void InserirAdmin()
@@ -306,6 +312,7 @@ namespace MainPlayground
             SalvarAdmin();
             usuarioLogado = null;
             adminLogado = null;
+            
             Menu();
         }
 
