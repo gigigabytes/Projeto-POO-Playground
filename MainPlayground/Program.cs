@@ -158,6 +158,8 @@ namespace MainPlayground
             Console.WriteLine("|06 - Inserir  |");
             Console.WriteLine("|07 - Atualizar |");
             Console.WriteLine("|08 - Excluir  |");
+            Console.WriteLine("|----Crianca----");
+            Console.WriteLine("|09 - Listar Criancas|");
             Console.WriteLine("|99 - Sair  |");
             Console.WriteLine("|                     |");
 
@@ -236,7 +238,7 @@ namespace MainPlayground
             Npacote.Inserir(p);
 
             // Npacote.Salvar();
-        }
+        
         public static void AtualizarPacote()
         {
             ListarPacote();
