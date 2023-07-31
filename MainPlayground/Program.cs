@@ -183,7 +183,19 @@ namespace MainPlayground
                 Console.WriteLine(responsavel);
             }
         }
+//
+        static void InserirUsuario()
+        {
+            Console.WriteLine("Informe Nome");
+            string n = Console.ReadLine();
+            Console.WriteLine("Informe senha:");
+            string s = Console.ReadLine();
+            Admin a = new Admin { nome = n, senha = s };
+            Nadmin.Inserir(a);
+            Console.WriteLine("Conta Criada");
+        }
 
+ //
         public static void AtualizarUsuario()
         {
             ListarResponsavel();
