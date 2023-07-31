@@ -108,6 +108,8 @@ class Ncrianca
     }
 }
 
+
+
 class Npacote
 {
     public static List<Pacote> pac = new List<Pacote>();
@@ -158,6 +160,56 @@ class Npacote
     }
 
 }
+//
+class Ncompra
+{
+    public static List<Compra> compras = new List<Compra>();
+     public static List<Compra> Listar()
+    {
+        return compras;
+    }
+    public static void Inserir(Compra compras)
+    {
+        int id = 0;
+        foreach (Compra obj in compras)
+        {
+            if (obj.id > id)
+            {
+                id = obj.id;
+            } 
+        }
+        id++;
+        compras.id = id;
+        compras.Add(compras);
+    }
+
+    public static Compra Listar (int id)
+    {
+        foreach(Compra obj in compras)
+        {
+            if (obj.id == id) return obj;
+        }
+        return null;
+    }
+
+    public static void Atualizar(Compra compras)
+    {
+        Compra obj = Listar(compras.id);
+        if (obj != null)
+        {
+            obj.idresponsavel = compras.idresponsavel;
+        }
+    }
+
+    public static void ExcluirPacote(Pacote pac)
+    {
+         Compra obj = Listar(compras.id);
+        if (obj != null) compras.Remove(obj);
+    }
+
+
+}
+//
 
 class Nadmin
 {
