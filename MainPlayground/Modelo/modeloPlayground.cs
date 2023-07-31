@@ -57,7 +57,16 @@ class Admin
 
 class Compra
 {
+    //
+{
+
+    public List<Compra> compras { get; set; }
+
+    public int IdResponsavel { get; set; }
+    public int IdPacote { get; set; }
     public DateTime data { get; set; }
+    //
+}
 
     public override string ToString() { return $"Dia da compra {data};"; }
 }
