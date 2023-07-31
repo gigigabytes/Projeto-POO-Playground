@@ -39,7 +39,7 @@ class Pacote
     public double valor { get; set; }
     public override string ToString()
     {
-        return $"{id} - {descricao} - Duração:{horas} - Preço:{valor}";
+        return $"{id} - {descricao} - Período:{horas} - Preço: R${valor} reais";
     }
 
    

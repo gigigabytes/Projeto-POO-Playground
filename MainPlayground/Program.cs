@@ -304,10 +304,10 @@ namespace MainPlayground
 
             else
             {
-                Console.WriteLine("Crianças cadastradas:");
+                Console.WriteLine("Crianças cadastradas:\n");
                 foreach(Crianca c in respon)
                 {
-                    Console.WriteLine($"{c.nome}");
+                    Console.WriteLine($"{c.nome}\n");
                 }
             }
         }
